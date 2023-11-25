@@ -69,7 +69,7 @@ Look at the system-wide file for the detailed description of available options.
 
 # License
 
-flaticron is published under the same license as the flatpak framework.
+flaticron is published under the same license as the flatpak framework. See COPYING for the full license text.
 
 SPDX-License-Identifier: LGPL-2.1-or-later
 
