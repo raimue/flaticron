@@ -20,7 +20,7 @@ sudo apt install flatpak bash
 
 Install flaticron:
 ```
-git clone https://github.com/raimue/flaticron
+git clone https://github.com/raimue/flaticron.git
 cd flaticron
 meson setup build
 meson install -C build
