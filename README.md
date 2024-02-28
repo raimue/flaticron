@@ -52,6 +52,7 @@ If you prefer classic cron over systemd, you can also add a manual command to th
 ```
 flaticron
   --config <file>      Read this additional config file
+  --stdout             Print the report to standard output instead of sending mail
   --user               Show only pending updates for user installation
   --system             Show only pending updates for system installation
   --installation=NAME  Show only pending updates for a non-default system-wide installation
