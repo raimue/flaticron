@@ -1,0 +1,129 @@
+#!/bin/bash
+# vim:set et sw=4 ts=4 tw=100:
+
+set -e
+
+VERSION="0.1"
+
+### defaults
+
+EMAIL="$(id -un)"
+USER=0
+SYSTEM=0
+INSTALLATION=
+STDOUT=0
+
+# flatpak command
+FLATPAK="flatpak"
+
+### functions
+
+version() {
+    echo "flaticron $VERSION"
+    echo "Copyright (c) 2023 Rainer Müller <raimue@codingfarm.de>"
+}
+
+usage() {
+    version
+    echo ""
+    echo "Usage: flaticron"
+    echo "--config <file>        Read this additional config file"
+    echo "--email <addr...>      List of addresses to send the report to"
+    echo "--stdout               Print the report to standard output instead of sending mail"
+    echo "--user                 Show pending updates for user installation"
+    echo "--system               Show pending updates for system installation"
+    echo "--installation <name>  Show pending updates for a non-default system-wide installation"
+    echo "--version              Print version information"
+    echo "--help                 Print this help text"
+}
+
+sendmail() {
+    :
+}
+
+### main
+
+# Add default config files
+CONFIG_FILES=()
+for f in "/etc/flaticron/flaticron.conf" \
+         "${XDG_CONFIG_HOME:-$HOME/.config}/flaticron/flaticron.conf"; do
+    if [ -e "$f" ]; then
+        CONFIG_FILES+=( "$f" )
+    fi
+done
+
+# Parse command-line arguments
+while [ $# -gt 0 ]; do
+    case "$1" in
+    --config)
+        shift
+        CONFIG_FILES+=( "$1" )
+        ;;
+    --stdout)
+        STDOUT=1
+        ;;
+    --user)
+        USER=1
+        ;;
+    --system)
+        SYSTEM=1
+        ;;
+    --installation*)
+        shift;
+        INSTALLATION=$1
+        ;;
+    --version)
+        version
+        exit 0
+        ;;
+    --help)
+        usage
+        exit 0
+        ;;
+    *)
+        usage >&2
+        exit 1
+        ;;
+    esac
+    shift
+done
+
+# Read config files
+for f in "${CONFIG_FILES[@]}"; do
+    if ! source "$f"; then
+        echo "Error: cannot load config file: $f" >&2
+        exit 1
+    fi
+done
+
+# Build flatpak arguments from selected options
+if [ $USER -eq 1 ]; then
+    ARGS+=( --user )
+fi
+if [ $SYSTEM -eq 1 ]; then
+    ARGS+=( --system )
+fi
+if [ -n "$INSTALLATION" ]; then
+    ARGS+=( --installation="$INSTALLATION" )
+fi
+
+# Get pending flatpak updates
+declare -a cmd=(
+    "$FLATPAK" "${ARGS[@]}"
+    remote-ls --updates --columns "name:f,application:f,arch:f,branch:f,version:f,origin:f"
+)
+count=0
+declare -a name application version origin branch
+while IFS=$'|' read -r _name _application _arch _branch _version _origin; do
+    name[$count]=$_name
+    application[$count]=$_application
+    version[$count]=$_version
+    origin[$count]=$_origin
+    branch[$count]=$_branch
+    count=$(( count + 1 ))
+done < <("${cmd[@]}" | tr $'\t' $'|')
+
+echo "Pending updates:"
+for ((i=0; i<$count;i++)); do
+    echo "${name[$i]} ${version[$i]}"
+done
