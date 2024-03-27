@@ -7,11 +7,14 @@ VERSION="0.1"
 
 ### defaults
 
-EMAIL="$(id -un)"
+EMAIL=$(id -un)
+HOSTNAME=$(hostname -s)
+LOGNAME=${LOGNAME:-$(id -un)}
 USER=0
 SYSTEM=0
 INSTALLATION=
 STDOUT=0
+TMPFILE=
 
 # flatpak command
 FLATPAK="flatpak"
@@ -37,11 +40,32 @@ usage() {
     echo "--help                 Print this help text"
 }
 
+tmpfile() {
+    mktemp --tmpdir flaticron.XXXXXXXXXX
+}
+
 sendmail() {
-    :
+    if [ $STDOUT -eq 1 ]; then
+        cat
+        return
+    fi
+
+    mailx -a "MIME-Version: 1.0" \
+          -a "Content-type: text/plain; charset=UTF-8" \
+          -a "Content-transfer-encoding: 8bit" \
+          "$@"
+}
+
+cleanup() {
+    if [ -n "$TMPFILE" ]; then
+        rm -f "$TMPFILE"
+    fi
 }
 
 ### main
+
+# Install trap handler for cleanup
+trap cleanup EXIT INT TERM
 
 # Add default config files
 CONFIG_FILES=()
@@ -111,23 +135,94 @@ if [ -n "$INSTALLATION" ]; then
     ARGS+=( --installation="$INSTALLATION" )
 fi
 
+# Create temporary file
+TMPFILE=$(tmpfile)
+
+# Update appstream metadata
+declare -a cmd=(
+    "$FLATPAK" "${ARGS[@]}"
+    update --appstream
+)
+if ! "${cmd[@]}" >& "$TMPFILE"; then
+    cat "$TMPFILE" >&2
+    echo "Error: failed to update flatpak appstream metadata" >&2
+    exit 1
+fi
+
 # Get pending flatpak updates
 declare -a cmd=(
     "$FLATPAK" "${ARGS[@]}"
-    remote-ls --updates --columns "name:f,application:f,arch:f,branch:f,version:f,origin:f"
+    remote-ls --updates --columns "application:f,branch:f,origin:f"
 )
+if ! "${cmd[@]}" >& "$TMPFILE"; then
+    cat "$TMPFILE" >&2
+    echo "Error: failed to get pending flatpak updates" >&2
+    exit 1
+fi
 count=0
-declare -a name application version origin branch
-while IFS=$'|' read -r _name _application _arch _branch _version _origin; do
-    name[$count]=$_name
+declare -a application branch origin
+# shellcheck disable=SC2004
+while IFS='|' read -r _application _branch _origin; do
     application[$count]=$_application
-    version[$count]=$_version
-    origin[$count]=$_origin
     branch[$count]=$_branch
+    origin[$count]=$_origin
     count=$(( count + 1 ))
-done < <("${cmd[@]}" | tr $'\t' $'|')
+done < <(tr $'\t' '|' < "$TMPFILE")
 
-echo "Pending updates:"
-for ((i=0; i<$count;i++)); do
-    echo "${name[$i]} ${version[$i]}"
+# If no updates are pending, do not send mail
+if [ $count -eq 0 ]; then
+    if [ $STDOUT -eq 1 ]; then
+        echo "Nothing to update."
+    fi
+    exit 0
+fi
+
+# Prepare and send report via mail
+TIMESTAMP=$(date -R)
+ARGSLIST=""
+if [ $USER -eq 1 ]; then
+    ARGSLIST="user"
+fi
+if [ $SYSTEM -eq 1 ]; then
+    ARGSLIST+="${ARGSLIST:+/}system"
+fi
+if [ -n "$INSTALLATION" ]; then
+    ARGSLIST+="${ARGSLIST:+/}$INSTALLATION"
+fi
+if [ -n "$ARGSLIST" ]; then
+    ARGSLIST=" $ARGSLIST"
+fi
+sendmail -s "$count flatpak$ARGSLIST update(s) for $HOSTNAME" "$EMAIL" < <(
+cat <<EOF
+flaticron report [$TIMESTAMP]
+========================================================================
+
+flaticron has detected that some flatpaks need updating on:
+
+  $HOSTNAME
+
+The following flatpaks ${ARGSLIST:+in$ARGSLIST }are currently pending an update:
+
+EOF
+
+for ((i=0; i<count;i++)); do
+    printf "  %-48s %-12s %s\n" \
+        "${application[$i]}" \
+        "${branch[$i]}" \
+        "${origin[$i]}"
 done
+
+cat <<EOF
+
+========================================================================
+
+You can perform the update by issuing the command:
+
+  $FLATPAK ${ARGS[@]:+${ARGS[@]} }update
+
+as $LOGNAME on $HOSTNAME
+
+-- 
+flaticron
+EOF
+)
