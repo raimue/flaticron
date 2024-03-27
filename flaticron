@@ -7,18 +7,23 @@ VERSION="0.1"
 
 ### defaults
 
+# config file options
 EMAIL=$(id -un)
 HOSTNAME=$(hostname -f)
+
+# system settings
 LOGNAME=${LOGNAME:-$(id -un)}
+FLATPAK="${FLATPAK:-}flatpak"
+SYSCONFDIR="${SYSCONFDIR:-/etc}"
+
+# command line options
 USER=0
 SYSTEM=0
 INSTALLATION=
 STDOUT=0
-TMPFILE=
-SYSCONFDIR="${SYSCONFDIR:-/etc}"
 
-# flatpak command
-FLATPAK="flatpak"
+# global variables
+TMPFILE=
 
 ### functions
 
