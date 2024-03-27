@@ -8,7 +8,7 @@ VERSION="0.1"
 ### defaults
 
 EMAIL=$(id -un)
-HOSTNAME=$(hostname -s)
+HOSTNAME=$(hostname -f)
 LOGNAME=${LOGNAME:-$(id -un)}
 USER=0
 SYSTEM=0
