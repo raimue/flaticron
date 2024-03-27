@@ -93,6 +93,7 @@ done
 
 # Read config files
 for f in "${CONFIG_FILES[@]}"; do
+    # shellcheck source=flaticron.conf
     if ! source "$f"; then
         echo "Error: cannot load config file: $f" >&2
         exit 1
