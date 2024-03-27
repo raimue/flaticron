@@ -68,9 +68,12 @@ while [ $# -gt 0 ]; do
     --system)
         SYSTEM=1
         ;;
-    --installation*)
-        shift;
+    --installation)
+        shift
         INSTALLATION=$1
+        ;;
+    --installation=*)
+        INSTALLATION=${1#--installation=}
         ;;
     --version)
         version
