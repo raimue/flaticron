@@ -15,6 +15,7 @@ SYSTEM=0
 INSTALLATION=
 STDOUT=0
 TMPFILE=
+SYSCONFDIR="${SYSCONFDIR:-/etc}"
 
 # flatpak command
 FLATPAK="flatpak"
@@ -69,7 +70,7 @@ trap cleanup EXIT INT TERM
 
 # Add default config files
 CONFIG_FILES=()
-for f in "/etc/flaticron/flaticron.conf" \
+for f in "$SYSCONFDIR/flaticron/flaticron.conf" \
          "${XDG_CONFIG_HOME:-$HOME/.config}/flaticron/flaticron.conf"; do
     if [ -e "$f" ]; then
         CONFIG_FILES+=( "$f" )
