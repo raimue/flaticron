@@ -31,7 +31,7 @@ TMPFILE=
 
 version() {
     echo "flaticron $VERSION"
-    echo "Copyright (c) 2023 Rainer Müller <raimue@codingfarm.de>"
+    echo "Copyright (c) Rainer Müller <raimue@codingfarm.de>"
 }
 
 usage() {
