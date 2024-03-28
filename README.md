@@ -8,6 +8,14 @@ flaticron uses [mail(1)](https://manpages.debian.org/stable/bsd-mailx/mail.1.en.
 
 # Installation
 
+## Debian
+
+Download the Debian package from the latest release and install it locally:
+
+```
+sudo apt install path/to/download/flaticron_*.deb
+```
+
 ## Manual installation from git repository
 
 Install dependencies:
@@ -86,6 +94,10 @@ flaticron is configured with builtin defaults, which can be overriden from the f
   - ${XDG\_CONFIG\_HOME}/flaticron/flaticron.conf (by default $HOME/.config/flaticron/flaticron.conf)
 
 Look at the system-wide file for the detailed description of available options.
+
+# Packaging
+
+While this repository contains supporting files to package flaticron for Debian, it can also be used on any other distribution. You are welcome to package flaticron for your Linux distribution of choice.
 
 # License
 
