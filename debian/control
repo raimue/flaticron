@@ -9,7 +9,7 @@ Vcs-Git: https://github.com/raimue/flaticron.git
 
 Package: flaticron
 Architecture: all
-Depends: bsd-mailx, systemd, ${misc:Depends}
+Depends: bsd-mailx, flatpak, systemd, ${misc:Depends}
 Description: Send mail notifications for pending Flatpak updates
  flaticron sends emails about pending Flatpak updates.
  The package provides a systemd unit with a timer running once a day to
