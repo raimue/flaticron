@@ -1,0 +1,5 @@
+/*.debhelper
+/.debhelper/
+/debhelper-build-stamp
+/flaticron/
+/flaticron.substvars

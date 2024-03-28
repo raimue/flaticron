@@ -1,0 +1,17 @@
+Source: flaticron
+Section: admin
+Priority: optional
+Maintainer: Rainer Müller <raimue@codingfarm.de>
+Build-Depends: debhelper-compat (= 13)
+Standards-Version: 4.6.2
+Vcs-Browser: https://github.com/raimue/flaticron
+Vcs-Git: https://github.com/raimue/flaticron.git
+
+Package: flaticron
+Architecture: all
+Depends: bsd-mailx, systemd, ${misc:Depends}
+Description: Send mail notifications for pending Flatpak updates
+ flaticron sends emails about pending Flatpak updates.
+ The package provides a systemd unit with a timer running once a day to
+ automate the check for available Flatpak updates.
+
