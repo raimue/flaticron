@@ -13,7 +13,7 @@ flaticron uses [mail(1)](https://manpages.debian.org/stable/bsd-mailx/mail.1.en.
 Install dependencies:
 ```
 # Build dependencies
-sudo apt install git meson
+sudo apt install git
 # Runtime dependencies
 sudo apt install flatpak bash
 ```
@@ -22,8 +22,7 @@ Install flaticron:
 ```
 git clone https://github.com/raimue/flaticron.git
 cd flaticron
-meson setup build
-meson install -C build
+sudo make install
 ```
 
 # Quick start
@@ -45,8 +44,18 @@ Then enable the systemd timer unit for your user session:
 systemctl --user enable --now flaticron.timer
 ```
 
+## Additional custom Flatpak installations
+
+If you are using [custom Flatpak installations](https://docs.flatpak.org/en/latest/tips-and-tricks.html#adding-a-custom-installation) with `flatpak --installation=extra`, you can also enable system-wide systemd timers with template units.
+
+To enable the systemd timer unit for a custom installation named "extra":
+```
+sudo systemctl enable --now flaticron@extra.timer
+```
+
 # Detailed usage
 
+The systemd timers as provided with flaticron run once a day by default.
 If you prefer classic cron over systemd, you can also add a manual command to the crontab:
 
 ```
