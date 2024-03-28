@@ -10,10 +10,11 @@ flaticron uses [mail(1)](https://manpages.debian.org/stable/bsd-mailx/mail.1.en.
 
 ## Debian
 
-Download the Debian package from the latest release and install it locally:
+Download the Debian package from the [latest release](https://github.com/raimue/flaticron/releases/) and install it locally:
 
 ```
-sudo apt install path/to/download/flaticron_*.deb
+wget https://github.com/raimue/flaticron/releases/download/v0.1/flaticron_0.1_all.deb
+sudo apt install ./flaticron_0.1_all.deb
 ```
 
 ## Manual installation from git repository
