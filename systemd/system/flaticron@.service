@@ -1,0 +1,6 @@
+[Unit]
+Description=Launch flaticron to notify of %i flatpaks pending an update
+
+[Service]
+Type=oneshot
+ExecStart=/usr/sbin/flaticron --installation %i
