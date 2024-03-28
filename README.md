@@ -31,6 +31,16 @@ sudo make install
 
 If you use the recommended system-wide installation, no special setup is necessary. Make sure you receive mail for the user *root* by configuring your address in /etc/aliases accordingly. As an alternative, set the mail address for your user in the config file at `/etc/flaticron/flaticron.conf`.
 
+For automatic daily update checks, enable the systemd timer in the system-wide installation:
+```
+sudo systemctl enable --now flaticron.timer
+```
+
+For a manual run, just run the `flaticron` script to send a mail. Alternatively, use the `--stdout` argument on command line to view the report directly in your terminal:
+```
+flaticron --stdout
+```
+
 ## User installation
 
 If you prefer `flatpak --user`, you can configure the email address for your user in the config file in ~/.config/flaticron/flaticron.conf. Otherwise it will be delivered to the local mailbox,
