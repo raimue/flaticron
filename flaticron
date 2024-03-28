@@ -14,7 +14,7 @@ HOSTNAME=$(hostname -f)
 # system settings
 LOGNAME=${LOGNAME:-$(id -un)}
 FLATPAK="${FLATPAK:-}flatpak"
-SYSCONFDIR="${SYSCONFDIR:-/etc}"
+SYSCONFDIR=${SYSCONFDIR:-/etc}
 XDG_CONFIG_HOME=${XDG_CONFIG_HOME:-$HOME/.config}
 
 # command line options
