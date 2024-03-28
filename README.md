@@ -4,7 +4,7 @@ flaticron sends daily mail reminders about pending updates for applications and 
 
 # Prerequisites
 
-flaticron uses [mail(1)](https://manpages.debian.org/stable/bsd-mailx/mail.1.en.html) and assumes you have setup an MTA such as exim4 or postfix to send mail. The recommended setup is a satellite system with an external smarthost as mail relay.
+flaticron uses [mailx(1)](https://manpages.debian.org/testing/bsd-mailx/mailx.1.en.html) and assumes you have setup an MTA such as exim4 or postfix to send mail. The recommended setup is a satellite system with an external smarthost as mail relay.
 
 # Installation
 
