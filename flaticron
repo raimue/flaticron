@@ -15,6 +15,7 @@ HOSTNAME=$(hostname -f)
 LOGNAME=${LOGNAME:-$(id -un)}
 FLATPAK="${FLATPAK:-}flatpak"
 SYSCONFDIR="${SYSCONFDIR:-/etc}"
+XDG_CONFIG_HOME=${XDG_CONFIG_HOME:-$HOME/.config}
 
 # command line options
 USER=0
@@ -76,7 +77,7 @@ trap cleanup EXIT INT TERM
 # Add default config files
 CONFIG_FILES=()
 for f in "$SYSCONFDIR/flaticron/flaticron.conf" \
-         "${XDG_CONFIG_HOME:-$HOME/.config}/flaticron/flaticron.conf"; do
+         "${XDG_CONFIG_HOME}/flaticron/flaticron.conf"; do
     if [ -e "$f" ]; then
         CONFIG_FILES+=( "$f" )
     fi
