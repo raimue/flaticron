@@ -22,7 +22,7 @@ sudo apt install ./flaticron_0.1_all.deb
 Install dependencies:
 ```
 # Build dependencies
-sudo apt install git
+sudo apt install git scdoc
 # Runtime dependencies
 sudo apt install flatpak bash
 ```
