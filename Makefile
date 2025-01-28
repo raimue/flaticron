@@ -1,6 +1,7 @@
 .PHONY: all install check
 
 INSTALL=install
+SCDOC=scdoc
 
 PREFIX=/usr/local
 SYSCONFDIR=/etc
@@ -11,7 +12,10 @@ SYSTEMDUSERDIR=$(SYSTEMDLIBDIR)/user
 DATADIR=$(PREFIX)/share
 DOCDIR=$(DATADIR)/doc
 
-all:
+all: flaticron.1
+
+flaticron.1: flaticron.1.scd
+	$(SCDOC) < $< > $@
 
 install:
 	$(INSTALL) -d -m 0755 $(DESTDIR)$(SBINDIR)
