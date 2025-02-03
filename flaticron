@@ -23,6 +23,7 @@ USER=0
 SYSTEM=0
 INSTALLATION=
 STDOUT=0
+EMAIL_CLI=
 
 # global variables
 TMPFILE=
@@ -39,7 +40,7 @@ usage() {
     echo ""
     echo "Usage: flaticron"
     echo "--config <file>        Read this additional config file"
-    echo "--email <addr...>      List of addresses to send the report to"
+    echo "--email <addr>         Mail address to send the report to"
     echo "--stdout               Print the report to standard output instead of sending mail"
     echo "--user                 Show pending updates for user installation"
     echo "--system               Show pending updates for system installation"
@@ -107,6 +108,10 @@ while [ $# -gt 0 ]; do
     --installation=*)
         INSTALLATION=${1#--installation=}
         ;;
+    --email)
+        shift
+        EMAIL_CLI=$1
+        ;;
     --version)
         version
         exit 0
@@ -131,6 +136,11 @@ for f in "${CONFIG_FILES[@]}"; do
         exit 1
     fi
 done
+
+# Mail address from command line overrides config file
+if [ -n "$EMAIL_CLI" ]; then
+    EMAIL=$EMAIL_CLI
+fi
 
 # Build flatpak arguments from selected options
 if [ $USER -eq 1 ]; then
