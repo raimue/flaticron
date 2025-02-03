@@ -43,7 +43,6 @@ install:
 	$(INSTALL) -d -m 0755 $(DESTDIR)$(DOCDIR)/flaticron
 	$(INSTALL) -m 0644 \
 		README.md \
-		COPYING \
 		$(DESTDIR)$(DOCDIR)/flaticron/
 
 check:
