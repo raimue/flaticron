@@ -1,5 +1,6 @@
 [Unit]
 Description=Launch flaticron to notify of user flatpaks pending an update
+Documentation=man:flaticron(1)
 
 [Service]
 Type=oneshot
