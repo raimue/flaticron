@@ -26,6 +26,7 @@ STDOUT=0
 EMAIL_CLI=
 
 # global variables
+ARGS=()
 TMPFILE=
 
 ### functions
