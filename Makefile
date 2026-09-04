@@ -1,4 +1,4 @@
-.PHONY: all install check
+.PHONY: all install clean check
 
 INSTALL=install
 SCDOC=scdoc
