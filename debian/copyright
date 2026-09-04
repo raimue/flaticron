@@ -2,7 +2,7 @@ Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
 Source: https://github.com/raimue/flaticron/releases
 
 Files: *
-Copyright: 2023-2024 Rainer Müller <raimue@codingfarm.de>
+Copyright: 2023-2026 Rainer Müller <raimue@codingfarm.de>
 License: LGPL-2.1+
 
 License: LGPL-2.1+
