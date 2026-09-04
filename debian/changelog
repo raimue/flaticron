@@ -1,10 +1,14 @@
-flaticron (0.2~pre2) UNRELEASED; urgency=medium
+flaticron (0.2~pre3) UNRELEASED; urgency=medium
 
   * Add man page for flaticron(8) command.
   * Allow overriding EMAIL from command line with --email <addr>.
   * Add network-online.target as dependency to systemd services.
+  * Call bsd-mailx explicitly and update dependency
+    to avoid incompatible mailx implementations.
+  * Bump Standards-Version to 4.7.2.
+  * Add Rules-Requires-Root: no to allow rootless builds.
 
- -- Rainer Müller <raimue@codingfarm.de>  Fri, 04 Sep 2026 12:15:53 +0200
+ -- Rainer Müller <raimue@codingfarm.de>  Fri, 04 Sep 2026 19:49:27 +0200
 
 flaticron (0.1) unstable; urgency=medium
 
