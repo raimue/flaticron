@@ -1,6 +1,6 @@
 [Unit]
 Description=Launch flaticron to notify of system flatpaks pending an update
-Documentation=man:flaticron(1)
+Documentation=man:flaticron(8)
 After=network-online.target
 Wants=network-online.target
 
