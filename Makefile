@@ -45,5 +45,8 @@ install:
 		README.md \
 		$(DESTDIR)$(DOCDIR)/flaticron/
 
+clean:
+	$(RM) flaticron.8
+
 check:
 	shellcheck flaticron flaticron.conf
