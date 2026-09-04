@@ -1,6 +1,8 @@
 [Unit]
 Description=Launch flaticron to notify of %i flatpaks pending an update
 Documentation=man:flaticron(1)
+After=network-online.target
+Wants=network-online.target
 
 [Service]
 Type=oneshot
