@@ -92,7 +92,7 @@ flaticron
 
 By default, flaticron operates the same as flatpak and reports pending updates for both the system and user installation. If you install applications and runtimes to the Flatpak user installation, simply run the command as your own user. If you use the recommended system-wide installation, you can run the flaticron command from your crontab or use the provided systemd units.
 
-flaticron is configured with builtin defaults, which can be overriden from the following configuration files. They are read in this order, in which later files may override earlier options:
+flaticron is configured with builtin defaults, which can be overridden from the following configuration files. They are read in this order, in which later files may override earlier options:
 
   - /etc/flaticron/flaticron.conf
   - ${XDG\_CONFIG\_HOME}/flaticron/flaticron.conf (by default $HOME/.config/flaticron/flaticron.conf)
