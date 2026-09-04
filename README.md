@@ -79,12 +79,14 @@ If you prefer classic cron over systemd, you can also add a manual command to th
 
 ```
 flaticron
-  --config <file>      Read this additional config file
-  --stdout             Print the report to standard output instead of sending mail
-  --user               Show only pending updates for user installation
-  --system             Show only pending updates for system installation
-  --installation=NAME  Show only pending updates for a non-default system-wide installation
-  --help               Show this help text
+  --config <file>        Read this additional config file
+  --email <addr>         Mail address to send the report to
+  --stdout               Print the report to standard output instead of sending mail
+  --user                 Show pending updates for user installation
+  --system               Show pending updates for system installation
+  --installation <name>  Show pending updates for a non-default system-wide installation
+  --version              Print version information
+  --help                 Print this help text
 ```
 
 By default, flaticron operates the same as flatpak and reports pending updates for both the system and user installation. If you install applications and runtimes to the Flatpak user installation, simply run the command as your own user. If you use the recommended system-wide installation, you can run the flaticron command from your crontab or use the provided systemd units.
