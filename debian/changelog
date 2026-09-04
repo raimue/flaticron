@@ -1,10 +1,10 @@
 flaticron (0.2~pre2) UNRELEASED; urgency=medium
 
-  * Add man page for flaticron(1) command.
+  * Add man page for flaticron(8) command.
   * Allow overriding EMAIL from command line with --email <addr>.
   * Add network-online.target as dependency to systemd services.
 
- -- Rainer Müller <raimue@codingfarm.de>  Fri, 04 Sep 2026 02:52:31 +0200
+ -- Rainer Müller <raimue@codingfarm.de>  Fri, 04 Sep 2026 12:15:53 +0200
 
 flaticron (0.1) unstable; urgency=medium
 
