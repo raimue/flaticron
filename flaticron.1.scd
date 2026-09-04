@@ -1,4 +1,4 @@
-flaticron(1) "0.2~pre1"
+flaticron(1) "0.2~pre2"
 
 ; SPDX-License-Identifier: LGPL-2.1-or-later
 
