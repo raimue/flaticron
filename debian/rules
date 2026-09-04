@@ -3,4 +3,4 @@
 	dh $@
 
 override_dh_auto_install:
-	$(MAKE) install PREFIX=/usr SYSTEMDLIBDIR=/lib/systemd DESTDIR=$$(pwd)/debian/flaticron
+	$(MAKE) install PREFIX=/usr SYSTEMDLIBDIR=/usr/lib/systemd DESTDIR=$$(pwd)/debian/flaticron
