@@ -10,7 +10,7 @@ VERSION="0.2~pre1"
 
 # config file options
 EMAIL=$(id -un)
-HOSTNAME=$(hostname -f)
+HOSTNAME=$(hostname -f 2>/dev/null || hostname)
 
 # system settings
 LOGNAME=${LOGNAME:-$(id -un)}
