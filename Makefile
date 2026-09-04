@@ -13,9 +13,9 @@ DATADIR=$(PREFIX)/share
 MANDIR=$(PREFIX)/share/man
 DOCDIR=$(DATADIR)/doc
 
-all: flaticron.1
+all: flaticron.8
 
-flaticron.1: flaticron.1.scd
+flaticron.8: flaticron.8.scd
 	$(SCDOC) < $< > $@
 
 install:
@@ -38,8 +38,8 @@ install:
 		systemd/system/flaticron@.timer \
 		$(DESTDIR)$(SYSTEMDSYSTEMDIR)/
 	$(INSTALL) -d -m 0755 $(DESTDIR)$(MANDIR)
-	$(INSTALL) -d -m 0755 $(DESTDIR)$(MANDIR)/man1
-	$(INSTALL) -m 0644 flaticron.1 $(DESTDIR)$(MANDIR)/man1/
+	$(INSTALL) -d -m 0755 $(DESTDIR)$(MANDIR)/man8
+	$(INSTALL) -m 0644 flaticron.8 $(DESTDIR)$(MANDIR)/man8/
 	$(INSTALL) -d -m 0755 $(DESTDIR)$(DOCDIR)/flaticron
 	$(INSTALL) -m 0644 \
 		README.md \
