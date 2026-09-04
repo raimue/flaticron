@@ -60,10 +60,10 @@ sendmail() {
         return
     fi
 
-    mailx -a "MIME-Version: 1.0" \
-          -a "Content-type: text/plain; charset=UTF-8" \
-          -a "Content-transfer-encoding: 8bit" \
-          "$@"
+    bsd-mailx -a "MIME-Version: 1.0" \
+              -a "Content-type: text/plain; charset=UTF-8" \
+              -a "Content-transfer-encoding: 8bit" \
+              "$@"
 }
 
 cleanup() {

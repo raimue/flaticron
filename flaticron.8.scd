@@ -19,7 +19,7 @@ flaticron sends daily mail reminders about pending updates for applications and
 runtimes installed by Flatpak. It is similar to the tools apticron for apt on
 Debian and porticron for portage on Gentoo.
 
-flaticron uses _mailx_(1) and assumes you have setup an MTA such as exim4 or
+flaticron uses _bsd-mailx_(1) and assumes you have setup an MTA such as exim4 or
 postfix to send mail. The recommended setup is a satellite system with an
 external smarthost as mail relay.
 
