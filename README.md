@@ -24,7 +24,7 @@ Install dependencies:
 # Build dependencies
 sudo apt install git scdoc
 # Runtime dependencies
-sudo apt install flatpak bash
+sudo apt install flatpak bash bsd-mailx
 ```
 
 Install flaticron:
