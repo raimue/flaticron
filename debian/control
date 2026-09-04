@@ -3,7 +3,7 @@ Section: admin
 Priority: optional
 Maintainer: Rainer Müller <raimue@codingfarm.de>
 Build-Depends: debhelper-compat (= 13), scdoc, shellcheck
-Standards-Version: 4.6.2
+Standards-Version: 4.7.2
 Vcs-Browser: https://github.com/raimue/flaticron
 Vcs-Git: https://github.com/raimue/flaticron.git
 
