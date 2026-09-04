@@ -31,6 +31,7 @@ Install flaticron:
 ```
 git clone https://github.com/raimue/flaticron.git
 cd flaticron
+make
 sudo make install
 ```
 
